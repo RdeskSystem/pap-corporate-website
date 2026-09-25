@@ -1,0 +1,908 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Locale {
+  ID
+  EN
+}
+
+enum TranslationStatus {
+  MISSING
+  DRAFT
+  REVIEW
+  PUBLISHED
+}
+
+enum ContentStatus {
+  DRAFT
+  REVIEW
+  APPROVED
+  PUBLISHED
+  SCHEDULED
+  ARCHIVED
+}
+
+enum UserStatus {
+  INVITED
+  ACTIVE
+  DISABLED
+}
+
+enum BlockType {
+  HERO
+  RICH_TEXT
+  IMAGE
+  IMAGE_TEXT
+  FEATURE_GRID
+  SERVICE_GRID
+  STATS
+  TIMELINE
+  PROCESS
+  LOGO_GRID
+  TESTIMONIAL
+  FAQ
+  CTA
+  CONTACT_FORM
+  NEWS_GRID
+  CAREER_GRID
+  VIDEO
+  ACCORDION
+  QUOTE
+  GALLERY
+}
+
+enum CertificationStatus {
+  PENDING
+  VERIFIED
+  EXPIRED
+  REVOKED
+}
+
+enum InquiryStatus {
+  NEW
+  IN_REVIEW
+  CONTACTED
+  QUALIFIED
+  CLOSED
+  SPAM
+}
+
+enum ApplicationStatus {
+  NEW
+  IN_REVIEW
+  SHORTLISTED
+  INTERVIEW
+  OFFERED
+  HIRED
+  REJECTED
+  ARCHIVED
+}
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+}
+
+enum TeamMemberKind {
+  TEAM
+  LEADERSHIP
+}
+
+enum MediaVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  PUBLISH
+  UNPUBLISH
+  LOGIN
+  LOGOUT
+  PASSWORD_RESET
+  MEDIA_UPLOAD
+  MEDIA_DELETE
+  ROLE_CHANGE
+  SETTINGS_CHANGE
+}
+
+enum AuthTokenPurpose {
+  PASSWORD_RESET
+  INVITATION
+  EMAIL_VERIFICATION
+}
+
+enum RedirectCode {
+  M301
+  M302
+}
+
+model User {
+  id                   String              @id @default(cuid())
+  email                String              @unique
+  fullName             String
+  passwordHash         String?
+  status               UserStatus          @default(INVITED)
+  emailVerifiedAt      DateTime?
+  lastLoginAt          DateTime?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  roles                UserRole[]
+  sessions             Session[]
+  authTokens           AuthToken[]
+  auditLogs            AuditLog[]
+  authoredArticles     Article[]           @relation("ArticleAuthor")
+  assignedInquiries    ContactSubmission[] @relation("InquiryAssignee")
+  assignedApplications CareerApplication[] @relation("ApplicationAssignee")
+
+  @@index([status, createdAt])
+  @@map("users")
+}
+
+model Role {
+  id          String           @id @default(cuid())
+  key         String           @unique
+  name        String
+  description String?
+  isSystem    Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  users       UserRole[]
+  permissions RolePermission[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String           @id @default(cuid())
+  code        String           @unique
+  description String?
+  roles       RolePermission[]
+
+  @@map("permissions")
+}
+
+model UserRole {
+  userId       String
+  roleId       String
+  assignedAt   DateTime @default(now())
+  assignedById String?
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role         Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@index([roleId])
+  @@map("user_roles")
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+  @@map("role_permissions")
+}
+
+model Session {
+  id         String   @id @default(cuid())
+  tokenHash  String   @unique
+  userId     String
+  expiresAt  DateTime
+  lastSeenAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+model AuthToken {
+  id         String           @id @default(cuid())
+  userId     String
+  purpose    AuthTokenPurpose
+  tokenHash  String           @unique
+  expiresAt  DateTime
+  consumedAt DateTime?
+  createdAt  DateTime         @default(now())
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, purpose, expiresAt])
+  @@map("auth_tokens")
+}
+
+model LoginThrottle {
+  key             String    @id
+  failedAttempts  Int       @default(0)
+  windowStartedAt DateTime  @default(now())
+  lockedUntil     DateTime?
+  expiresAt       DateTime
+  updatedAt       DateTime  @updatedAt
+
+  @@index([lockedUntil])
+  @@index([expiresAt])
+  @@map("login_throttles")
+}
+
+model Page {
+  id           String            @id @default(cuid())
+  key          String            @unique
+  status       ContentStatus     @default(DRAFT)
+  createdById  String?
+  updatedById  String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  publishedAt  DateTime?
+  scheduledAt  DateTime?
+  deletedAt    DateTime?
+  translations PageTranslation[]
+  blocks       PageBlock[]
+
+  @@index([status, publishedAt])
+  @@index([createdAt])
+  @@map("pages")
+}
+
+model PageTranslation {
+  id                String            @id @default(cuid())
+  pageId            String
+  locale            Locale
+  slug              String
+  title             String
+  excerpt           String?
+  translationStatus TranslationStatus @default(DRAFT)
+  seoTitle          String?
+  seoDescription    String?
+  ogTitle           String?
+  ogDescription     String?
+  ogImageId         String?
+  robotsIndex       Boolean           @default(true)
+  page              Page              @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  ogImage           Media?            @relation("PageOgImage", fields: [ogImageId], references: [id], onDelete: SetNull)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@unique([pageId, locale])
+  @@unique([locale, slug])
+  @@index([locale, translationStatus])
+  @@map("page_translations")
+}
+
+model PageBlock {
+  id            String                 @id @default(cuid())
+  pageId        String
+  type          BlockType
+  position      Int
+  schemaVersion Int                    @default(1)
+  page          Page                   @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  translations  PageBlockTranslation[]
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+
+  @@unique([pageId, position])
+  @@index([type])
+  @@map("page_blocks")
+}
+
+model PageBlockTranslation {
+  id                String            @id @default(cuid())
+  blockId           String
+  locale            Locale
+  data              Json
+  translationStatus TranslationStatus @default(DRAFT)
+  block             PageBlock         @relation(fields: [blockId], references: [id], onDelete: Cascade)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@unique([blockId, locale])
+  @@index([locale, translationStatus])
+  @@map("page_block_translations")
+}
+
+model Service {
+  id           String               @id @default(cuid())
+  key          String               @unique
+  status       ContentStatus        @default(DRAFT)
+  enabled      Boolean              @default(false)
+  position     Int                  @default(0)
+  createdById  String?
+  updatedById  String?
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  publishedAt  DateTime?
+  scheduledAt  DateTime?
+  deletedAt    DateTime?
+  translations ServiceTranslation[]
+  industries   ServiceIndustry[]
+
+  @@index([status, enabled, publishedAt])
+  @@index([position])
+  @@map("services")
+}
+
+model ServiceTranslation {
+  id                String            @id @default(cuid())
+  serviceId         String
+  locale            Locale
+  slug              String
+  title             String
+  shortDescription  String
+  longDescription   String?
+  benefits          Json?
+  capabilities      Json?
+  process           Json?
+  faq               Json?
+  translationStatus TranslationStatus @default(DRAFT)
+  seoTitle          String?
+  seoDescription    String?
+  ogImageId         String?
+  service           Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  ogImage           Media?            @relation("ServiceOgImage", fields: [ogImageId], references: [id], onDelete: SetNull)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@unique([serviceId, locale])
+  @@unique([locale, slug])
+  @@index([locale, translationStatus])
+  @@map("service_translations")
+}
+
+model Industry {
+  id           String                @id @default(cuid())
+  key          String                @unique
+  status       ContentStatus         @default(DRAFT)
+  verifiedAt   DateTime?
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+  publishedAt  DateTime?
+  deletedAt    DateTime?
+  translations IndustryTranslation[]
+  services     ServiceIndustry[]
+
+  @@index([status, verifiedAt, publishedAt])
+  @@map("industries")
+}
+
+model IndustryTranslation {
+  id                String            @id @default(cuid())
+  industryId        String
+  locale            Locale
+  slug              String
+  title             String
+  overview          String?
+  challenges        Json?
+  capabilities      Json?
+  approach          String?
+  translationStatus TranslationStatus @default(DRAFT)
+  seoTitle          String?
+  seoDescription    String?
+  industry          Industry          @relation(fields: [industryId], references: [id], onDelete: Cascade)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@unique([industryId, locale])
+  @@unique([locale, slug])
+  @@index([locale, translationStatus])
+  @@map("industry_translations")
+}
+
+model ServiceIndustry {
+  serviceId  String
+  industryId String
+  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  industry   Industry @relation(fields: [industryId], references: [id], onDelete: Cascade)
+
+  @@id([serviceId, industryId])
+  @@index([industryId])
+  @@map("service_industries")
+}
+
+model Operation {
+  id           String                 @id @default(cuid())
+  key          String                 @unique
+  status       ContentStatus          @default(DRAFT)
+  position     Int                    @default(0)
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  publishedAt  DateTime?
+  deletedAt    DateTime?
+  translations OperationTranslation[]
+
+  @@index([status, position])
+  @@map("operations")
+}
+
+model OperationTranslation {
+  id                String            @id @default(cuid())
+  operationId       String
+  locale            Locale
+  title             String
+  description       String?
+  details           Json?
+  translationStatus TranslationStatus @default(DRAFT)
+  operation         Operation         @relation(fields: [operationId], references: [id], onDelete: Cascade)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@unique([operationId, locale])
+  @@index([locale, translationStatus])
+  @@map("operation_translations")
+}
+
+model Certification {
+  id                String                     @id @default(cuid())
+  issuer            String?
+  certificateNumber String?
+  issueDate         DateTime?
+  expiryDate        DateTime?
+  documentMediaId   String?
+  status            CertificationStatus        @default(PENDING)
+  verifiedAt        DateTime?
+  verifiedById      String?
+  createdAt         DateTime                   @default(now())
+  updatedAt         DateTime                   @updatedAt
+  translations      CertificationTranslation[]
+  document          Media?                     @relation("CertificationDocument", fields: [documentMediaId], references: [id], onDelete: SetNull)
+
+  @@index([status, expiryDate])
+  @@map("certifications")
+}
+
+model CertificationTranslation {
+  id                String            @id @default(cuid())
+  certificationId   String
+  locale            Locale
+  name              String
+  description       String?
+  translationStatus TranslationStatus @default(DRAFT)
+  certification     Certification     @relation(fields: [certificationId], references: [id], onDelete: Cascade)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@unique([certificationId, locale])
+  @@index([locale, translationStatus])
+  @@map("certification_translations")
+}
+
+model TeamMember {
+  id              String                  @id @default(cuid())
+  key             String                  @unique
+  kind            TeamMemberKind          @default(TEAM)
+  position        Int                     @default(0)
+  portraitMediaId String?
+  status          ContentStatus           @default(DRAFT)
+  portrait        Media?                  @relation("TeamPortrait", fields: [portraitMediaId], references: [id], onDelete: SetNull)
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+  publishedAt     DateTime?
+  deletedAt       DateTime?
+  translations    TeamMemberTranslation[]
+
+  @@index([kind, status, position])
+  @@map("team_members")
+}
+
+model TeamMemberTranslation {
+  id                String            @id @default(cuid())
+  teamMemberId      String
+  locale            Locale
+  name              String
+  roleTitle         String?
+  biography         String?
+  translationStatus TranslationStatus @default(DRAFT)
+  teamMember        TeamMember        @relation(fields: [teamMemberId], references: [id], onDelete: Cascade)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@unique([teamMemberId, locale])
+  @@index([locale, translationStatus])
+  @@map("team_member_translations")
+}
+
+model Job {
+  id             String              @id @default(cuid())
+  key            String              @unique
+  employmentType EmploymentType
+  department     String?
+  location       String?
+  deadline       DateTime?
+  status         ContentStatus       @default(DRAFT)
+  createdById    String?
+  updatedById    String?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  publishedAt    DateTime?
+  scheduledAt    DateTime?
+  deletedAt      DateTime?
+  translations   JobTranslation[]
+  applications   CareerApplication[]
+
+  @@index([status, deadline, publishedAt])
+  @@index([employmentType, location])
+  @@map("jobs")
+}
+
+model JobTranslation {
+  id                String            @id @default(cuid())
+  jobId             String
+  locale            Locale
+  slug              String
+  position          String
+  description       String
+  responsibilities  Json?
+  requirements      Json?
+  benefits          Json?
+  translationStatus TranslationStatus @default(DRAFT)
+  seoTitle          String?
+  seoDescription    String?
+  job               Job               @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@unique([jobId, locale])
+  @@unique([locale, slug])
+  @@index([locale, translationStatus])
+  @@map("job_translations")
+}
+
+model Article {
+  id           String               @id @default(cuid())
+  key          String               @unique
+  authorId     String?
+  status       ContentStatus        @default(DRAFT)
+  featured     Boolean              @default(false)
+  createdById  String?
+  updatedById  String?
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  publishedAt  DateTime?
+  scheduledAt  DateTime?
+  deletedAt    DateTime?
+  author       User?                @relation("ArticleAuthor", fields: [authorId], references: [id], onDelete: SetNull)
+  translations ArticleTranslation[]
+  categories   ArticleCategory[]
+  tags         ArticleTag[]
+
+  @@index([status, publishedAt])
+  @@index([featured, publishedAt])
+  @@index([authorId])
+  @@map("articles")
+}
+
+model ArticleTranslation {
+  id                 String            @id @default(cuid())
+  articleId          String
+  locale             Locale
+  slug               String
+  title              String
+  excerpt            String?
+  body               String
+  coverMediaId       String?
+  readingTimeMinutes Int?
+  translationStatus  TranslationStatus @default(DRAFT)
+  seoTitle           String?
+  seoDescription     String?
+  ogTitle            String?
+  ogDescription      String?
+  article            Article           @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  coverMedia         Media?            @relation("ArticleCover", fields: [coverMediaId], references: [id], onDelete: SetNull)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  @@unique([articleId, locale])
+  @@unique([locale, slug])
+  @@index([locale, translationStatus])
+  @@map("article_translations")
+}
+
+model Category {
+  id           String                @id @default(cuid())
+  key          String                @unique
+  articles     ArticleCategory[]
+  translations CategoryTranslation[]
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  @@map("categories")
+}
+
+model CategoryTranslation {
+  id                String            @id @default(cuid())
+  categoryId        String
+  locale            Locale
+  slug              String
+  name              String
+  translationStatus TranslationStatus @default(DRAFT)
+  category          Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, locale])
+  @@unique([locale, slug])
+  @@map("category_translations")
+}
+
+model Tag {
+  id           String           @id @default(cuid())
+  key          String           @unique
+  articles     ArticleTag[]
+  translations TagTranslation[]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  @@map("tags")
+}
+
+model TagTranslation {
+  id                String            @id @default(cuid())
+  tagId             String
+  locale            Locale
+  slug              String
+  name              String
+  translationStatus TranslationStatus @default(DRAFT)
+  tag               Tag               @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([tagId, locale])
+  @@unique([locale, slug])
+  @@map("tag_translations")
+}
+
+model ArticleCategory {
+  articleId  String
+  categoryId String
+  article    Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, categoryId])
+  @@index([categoryId])
+  @@map("article_categories")
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+  @@index([tagId])
+  @@map("article_tags")
+}
+
+model Media {
+  id                 String               @id @default(cuid())
+  storageKey         String               @unique
+  originalName       String
+  mimeType           String
+  byteSize           Int
+  width              Int?
+  height             Int?
+  visibility         MediaVisibility      @default(PUBLIC)
+  folder             String?
+  uploadedById       String?
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  deletedAt          DateTime?
+  translations       MediaTranslation[]
+  certifications     Certification[]      @relation("CertificationDocument")
+  pageOgImages       PageTranslation[]    @relation("PageOgImage")
+  serviceOgImages    ServiceTranslation[] @relation("ServiceOgImage")
+  articleCovers      ArticleTranslation[] @relation("ArticleCover")
+  teamPortraits      TeamMember[]         @relation("TeamPortrait")
+  partnerLogos       Partner[]            @relation("PartnerLogo")
+  applicationCVs     CareerApplication[]  @relation("ApplicationCV")
+  applicationLetters CareerApplication[]  @relation("ApplicationCoverLetter")
+
+  @@index([mimeType, createdAt])
+  @@index([visibility, folder])
+  @@index([uploadedById])
+  @@map("media")
+}
+
+model MediaTranslation {
+  id      String  @id @default(cuid())
+  mediaId String
+  locale  Locale
+  altText String?
+  caption String?
+  credit  String?
+  media   Media   @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@unique([mediaId, locale])
+  @@index([locale])
+  @@map("media_translations")
+}
+
+model Partner {
+  id           String               @id @default(cuid())
+  key          String               @unique
+  status       ContentStatus        @default(DRAFT)
+  logoMediaId  String?
+  position     Int                  @default(0)
+  logo         Media?               @relation("PartnerLogo", fields: [logoMediaId], references: [id], onDelete: SetNull)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  publishedAt  DateTime?
+  deletedAt    DateTime?
+  translations PartnerTranslation[]
+
+  @@index([status, position])
+  @@map("partners")
+}
+
+model PartnerTranslation {
+  id                String            @id @default(cuid())
+  partnerId         String
+  locale            Locale
+  name              String
+  description       String?
+  translationStatus TranslationStatus @default(DRAFT)
+  partner           Partner           @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+
+  @@unique([partnerId, locale])
+  @@map("partner_translations")
+}
+
+model Testimonial {
+  id           String                   @id @default(cuid())
+  status       ContentStatus            @default(DRAFT)
+  position     Int                      @default(0)
+  createdAt    DateTime                 @default(now())
+  updatedAt    DateTime                 @updatedAt
+  publishedAt  DateTime?
+  translations TestimonialTranslation[]
+
+  @@index([status, position])
+  @@map("testimonials")
+}
+
+model TestimonialTranslation {
+  id                String            @id @default(cuid())
+  testimonialId     String
+  locale            Locale
+  quote             String
+  name              String?
+  roleTitle         String?
+  organization      String?
+  translationStatus TranslationStatus @default(DRAFT)
+  testimonial       Testimonial       @relation(fields: [testimonialId], references: [id], onDelete: Cascade)
+
+  @@unique([testimonialId, locale])
+  @@map("testimonial_translations")
+}
+
+model ContactSubmission {
+  id               String        @id @default(cuid())
+  companyName      String
+  contactName      String
+  businessEmail    String
+  phone            String?
+  industry         String?
+  serviceRequired  String?
+  message          String
+  locale           Locale        @default(ID)
+  consentAt        DateTime
+  consentVersion   String
+  status           InquiryStatus @default(NEW)
+  assignedToUserId String?
+  archivedAt       DateTime?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  assignedTo       User?         @relation("InquiryAssignee", fields: [assignedToUserId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([businessEmail])
+  @@index([assignedToUserId, status])
+  @@map("contact_submissions")
+}
+
+model CareerApplication {
+  id                 String            @id @default(cuid())
+  jobId              String
+  fullName           String
+  email              String
+  phone              String
+  cvMediaId          String
+  coverLetterMediaId String?
+  coverLetter        String?
+  locale             Locale            @default(ID)
+  consentAt          DateTime
+  consentVersion     String
+  status             ApplicationStatus @default(NEW)
+  assignedToUserId   String?
+  archivedAt         DateTime?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  job                Job               @relation(fields: [jobId], references: [id], onDelete: Restrict)
+  cv                 Media             @relation("ApplicationCV", fields: [cvMediaId], references: [id], onDelete: Restrict)
+  coverLetterFile    Media?            @relation("ApplicationCoverLetter", fields: [coverLetterMediaId], references: [id], onDelete: SetNull)
+  assignedTo         User?             @relation("ApplicationAssignee", fields: [assignedToUserId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([email])
+  @@index([jobId, status])
+  @@map("career_applications")
+}
+
+model NavigationItem {
+  id           String                  @id @default(cuid())
+  key          String                  @unique
+  position     Int                     @default(0)
+  enabled      Boolean                 @default(true)
+  translations NavigationTranslation[]
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime                @updatedAt
+
+  @@index([enabled, position])
+  @@map("navigation_items")
+}
+
+model NavigationTranslation {
+  id                String            @id @default(cuid())
+  itemId            String
+  locale            Locale
+  label             String
+  href              String
+  translationStatus TranslationStatus @default(DRAFT)
+  item              NavigationItem    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, locale])
+  @@map("navigation_translations")
+}
+
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       Json
+  isPublic    Boolean  @default(false)
+  updatedById String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isPublic])
+  @@map("site_settings")
+}
+
+model Redirect {
+  id          String       @id @default(cuid())
+  oldPath     String       @unique
+  newPath     String
+  code        RedirectCode @default(M301)
+  enabled     Boolean      @default(true)
+  createdById String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([enabled])
+  @@map("redirects")
+}
+
+model AuditLog {
+  id            String      @id @default(cuid())
+  actorId       String?
+  action        AuditAction
+  entityType    String
+  entityId      String?
+  ipAddress     String?
+  userAgent     String?
+  previousValue Json?
+  newValue      Json?
+  createdAt     DateTime    @default(now())
+  actor         User?       @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId, createdAt])
+  @@index([entityType, entityId, createdAt])
+  @@index([action, createdAt])
+  @@map("audit_logs")
+}

@@ -1,0 +1,16 @@
+.next/
+node_modules/
+out/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+dist/
+build/
+
+# Original source brief may contain internal planning details; publish only the derived docs.
+docs/master_prompt.md
+
+# Uploaded source archive is redundant with the extracted project assets.
+WEB.zip
