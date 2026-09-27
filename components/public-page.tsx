@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import {
+  isLegalInformationSlug,
+  LegalInformationPage,
+} from "@/components/legal-information-page";
+import {
   CompanyProfilePage,
   isCompanyProfileSlug,
 } from "@/components/company-profile-page";
@@ -21,10 +25,12 @@ export function PublicPage({
   if (isCompanyProfileSlug(slug)) {
     return <CompanyProfilePage locale={locale} slug={slug} />;
   }
+  if (isLegalInformationSlug(slug)) {
+    return <LegalInformationPage locale={locale} slug={slug} />;
+  }
 
   const text = copy[locale];
   const page = text.pages[slug];
-  const isLegal = slug === "privacy-policy" || slug === "terms" || slug === "cookie-policy";
 
   return (
     <SiteShell locale={locale} currentSlug={slug}>
@@ -43,7 +49,7 @@ export function PublicPage({
 
       <section className="page-content section-pad content-width">
         <div className="page-content__main">
-          <p className="eyebrow">{isLegal ? (locale === "id" ? "STATUS DOKUMEN" : "DOCUMENT STATUS") : (locale === "id" ? "PEMBARUAN KONTEN" : "CONTENT UPDATE")}</p>
+          <p className="eyebrow">{locale === "id" ? "PEMBARUAN KONTEN" : "CONTENT UPDATE"}</p>
           <h2>{page.statusTitle}</h2>
           <p className="page-content__lead">{page.statusBody}</p>
         </div>

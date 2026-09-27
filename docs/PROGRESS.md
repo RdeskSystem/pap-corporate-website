@@ -2,11 +2,11 @@
 
 ## Current status
 
-The workspace has a bilingual public website, responsive design system, logo-derived assets, a validated Prisma schema/initial migration, role/permission seed, and an initial protected admin login/session/RBAC foundation. The approved 2026 company profile is presented across the public ID/EN company, services, operations, clients, certification, and contact pages. The site runs at `https://papcorp.services` through a dedicated systemd service and Nginx TLS vhost; it remains noindex while legal pages are unfinished. There is no project database connection or admin account, and CMS content CRUD modules are not ready yet.
+The workspace has a bilingual public website, responsive PAP-branded design, logo-derived assets, approved 2026 company profile, published bilingual legal pages, and an inquiry form that prepares a WhatsApp message without storing form data on the site. The site runs at `https://papcorp.services` through a dedicated systemd service and Nginx TLS vhost and is indexable; unpublished careers/news routes remain noindex and out of the sitemap. There is no project database connection or admin account, and CMS content CRUD modules are not ready yet.
 
-**Current phase:** Approved public company profile and protected CMS foundation.
-**Current task:** Continue database-backed CMS modules and complete legal/privacy content and launch checks.
-**Current blockers:** Project database, private storage, transactional email, and legal/privacy workflow are not configured.
+**Current phase:** Public website finalization and protected CMS foundation.
+**Current task:** Continue database-backed CMS modules and complete release accessibility, responsive, and browser checks.
+**Current blockers:** Project database, private storage, transactional email, and server-side contact workflows are not configured.
 
 ## Phase 1 — Discovery
 
@@ -42,10 +42,10 @@ The workspace has a bilingual public website, responsive design system, logo-der
 - [x] Homepage foundation with the required section structure
 - [x] Responsive primary navigation and ID/EN route switching
 - [x] Approved company profile, services, client list, operations, certification and contact content in Indonesian and English
-- [x] Careers, news, contact and legal empty/pending states
-- [x] Metadata, noindex preview gate, robots, sitemap and manifest foundations
+- [x] WhatsApp inquiry contact flow and bilingual privacy, terms, and cookie pages
+- [x] Metadata, robots, sitemap, and language alternates; careers/news stay unpublished and noindex
 - [x] 404, 500 and loading states
-- [ ] Approved legal text, vacancies, articles and certification evidence asset
+- [ ] Vacancies, articles and certification evidence asset
 - [ ] Structured data after verified company/domain details are available
 
 ## Phase 5 — CMS and backend
@@ -67,9 +67,9 @@ The workspace has a bilingual public website, responsive design system, logo-der
 ## Phase 6 — QA and release
 
 - [x] TypeScript check
-- [x] Seven unit checks covering locale/routes, contact placeholders, password hashing and permission checks
+- [x] Eight unit checks covering locale/routes, approved profile/contact data, password hashing and permission checks
 - [x] Production build
-- [x] Public/admin route and asset smoke checks, preview indexing gate, HTTPS vhost, and security headers
+- [x] Public/admin route and asset smoke checks, production indexing rules, HTTPS vhost, and security headers
 - [x] Isolated `papcorp-web` service, domain vhost, TLS certificate, and graceful Nginx reload
 - [x] Prisma schema validation and client generation
 - [x] Dependency audit (0 reported vulnerabilities with the current lockfile)
@@ -82,14 +82,14 @@ The workspace has a bilingual public website, responsive design system, logo-der
 
 ## Blockers / pending inputs
 
-- The approved Company Profile 2026 provides profile/positioning, services, operating methodology, clients, ISO certificate details, contact information, and office addresses. Office photography, social links, active vacancies/news, privacy/legal wording, and additional certification evidence are not included.
+- The approved Company Profile 2026 provides profile/positioning, services, operating methodology, clients, ISO certificate details, director phone/WhatsApp, and office addresses. Office photography, social links, active vacancies/news, and additional certification evidence are not included.
 - Project infrastructure: PostgreSQL connection, private object storage, transactional email, secret management, analytics choice, data-retention approval, and CMS owner/admin identities.
-- Contact and application forms remain inactive until a verified destination, secure persistence, privacy notice, file storage and notification workflow are configured.
+- The contact form opens WhatsApp with a prepared message and does not persist information on the site. Application forms remain inactive until a verified destination, secure persistence, privacy notice, file storage and notification workflow are configured.
 - Prisma is pinned to 6.12.0 because newer tested Prisma CLI dependency chains reported high-severity advisories. Re-evaluate and upgrade when a patched release can be validated; see ADR-004.
 
 ## Next tasks
 
 1. Configure project PostgreSQL, apply the reviewed migration, seed roles, and create the first admin through the guarded bootstrap command.
 2. Continue CMS CRUD modules, module-level permissions, reset/MFA flows, content preview/publish workflow, and private media handling.
-3. Complete legal/privacy content and decide when the indexing gate can be opened.
+3. Supply approved careers/news content and real office/certification imagery before publishing those sections.
 4. Complete database-backed auth/API/CMS tests and security, accessibility, responsive, SEO, and end-to-end verification before production release.

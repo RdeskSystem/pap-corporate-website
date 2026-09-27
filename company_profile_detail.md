@@ -6,10 +6,6 @@
 
 * Ahimsa: +62 821-4371-3602
 
-* Email: callcenter@papcorp.services
-
-* Website: [https://papcorp.services/]
-
 ## Hi There!
 
 Mengusung nilai profesionalisme dan kepercayaan, PT Pelita Anugrah Perkasa hadir sebagai penyedia layanan operasional dan collection yang terpercaya di Indonesia.
@@ -230,7 +226,3 @@ Daerah Istimewa Yogyakarta 55242
 **Hubungi Kami:**
 
 * Ahimsa: +62 821-4371-3602 (Direktur)
-
-* Email: callcenter@papcorp.services
-
-* Website: [www.papcorporation.com]

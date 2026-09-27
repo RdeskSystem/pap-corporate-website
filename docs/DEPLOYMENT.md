@@ -8,7 +8,7 @@
 
 ## Environment variables
 
-Expected names (values belong in secret management, never in source control): `DATABASE_URL`, `AUTH_SECRET`, SMTP host/user/password, storage bucket/access key/secret, `NEXT_PUBLIC_SITE_URL`, `PUBLICATION_APPROVED`, and optional analytics IDs. Keep `PUBLICATION_APPROVED=false` until the company approves public copy/legal/contact details; set the canonical origin and approval flag in the build environment because public routes and metadata are statically generated. Provide a checked-in `.env.example` with blank/non-secret placeholders only.
+Expected names (values belong in secret management, never in source control): `DATABASE_URL`, `AUTH_SECRET`, SMTP host/user/password, storage bucket/access key/secret, `NEXT_PUBLIC_SITE_URL`, `PUBLICATION_APPROVED`, and optional analytics IDs. Set the canonical origin and publication flag in the build environment because public routes and metadata are statically generated. Use `PUBLICATION_APPROVED=true` only for an approved public production release. Provide a checked-in `.env.example` with blank/non-secret placeholders only.
 
 ## Release process
 
@@ -27,6 +27,6 @@ After the project database is configured, apply migrations and seed system roles
 
 ## Current status
 
-The company-profile site is running at `https://papcorp.services` through `/etc/nginx/sites-available/papcorp.services.conf` and the `papcorp-web.service` systemd unit. Next.js listens only on `127.0.0.1:3102` as the dedicated `papcorp-web` user. A Let's Encrypt certificate is installed with automatic renewal. The approved 2026 company profile supplies the published bilingual company, service, operations, certification, client, and contact content. The site remains noindex with `PUBLICATION_APPROVED=false` while legal-policy pages are pending; personal-data forms remain disabled. The existing SOPI/DUX services are separate.
+The company-profile site is running at `https://papcorp.services` through `/etc/nginx/sites-available/papcorp.services.conf` and the `papcorp-web.service` systemd unit. Next.js listens only on `127.0.0.1:3102` as the dedicated `papcorp-web` user. A Let's Encrypt certificate is installed with automatic renewal. The approved 2026 company profile and bilingual legal pages are published. `PUBLICATION_APPROVED=true` enables indexing; careers and news remain unlinked, noindex, and excluded from the sitemap. The WhatsApp inquiry form is client-side and does not store its contents on this site. The existing SOPI/DUX services are separate.
 
-Project PostgreSQL, private media storage, transactional email, and admin bootstrap credentials have not been configured. CMS publishing and public legal policies remain pending.
+Project PostgreSQL, private media storage, transactional email, and admin bootstrap credentials have not been configured. CMS publishing and server-side contact persistence remain pending.

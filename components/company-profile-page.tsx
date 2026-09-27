@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
+import { ContactIcons } from "@/components/contact-icons";
 import { companyProfile } from "@/lib/company-profile";
+import { WhatsAppInquiryForm } from "@/components/whatsapp-inquiry-form";
 import {
   copy,
   routeFor,
@@ -236,16 +238,27 @@ export function CompanyProfilePage({
               <p className="eyebrow">{profile.contactTitle}</p>
               <h2>{profile.contactBody}</h2>
               <div className="profile-contact-links">
-                <a className="button button--primary" href={`tel:${profile.phone.replaceAll(" ", "")}`}>
-                  {profile.phone}<span aria-hidden="true">↗</span>
-                </a>
-                <a className="text-link" href={`mailto:${profile.email}`}>
-                  {profile.email}<span aria-hidden="true">→</span>
+                <a className="button button--primary" href={`tel:${profile.phone.replace(/[^+\d]/g, "")}`}>
+                  <ContactIcons type="phone" />
+                  {locale === "id" ? "Telepon Direktur" : "Call the Director"}
+                  <span aria-hidden="true">↗</span>
                 </a>
               </div>
               <p className="profile-contact-person">{profile.contactPerson}</p>
-              <p><strong>{profile.primaryWebsiteLabel}:</strong> <a href="https://papcorp.services" target="_blank" rel="noreferrer">https://papcorp.services</a></p>
-              <p><strong>{profile.secondaryWebsiteLabel}:</strong> <a href="https://www.papcorporation.com" target="_blank" rel="noreferrer">{profile.secondaryWebsite}</a></p>
+            </section>
+            <section className="profile-section profile-section--contact-form">
+              <div className="profile-section__heading">
+                <p className="eyebrow">{locale === "id" ? "KIRIM PERTANYAAN" : "SEND AN INQUIRY"}</p>
+                <h2>{locale === "id" ? "Ceritakan kebutuhan bisnis Anda." : "Tell us about your business needs."}</h2>
+                <p>{locale === "id"
+                  ? "Isi formulir singkat. WhatsApp akan terbuka dengan pesan yang sudah disiapkan untuk Anda periksa dan kirim."
+                  : "Complete this short form. WhatsApp will open with a prepared message for you to review and send."}</p>
+              </div>
+              <WhatsAppInquiryForm
+                locale={locale}
+                whatsappPhone={profile.whatsappPhone}
+                services={profile.services.map((service) => service.name)}
+              />
             </section>
             <section className="profile-section">
               <div className="profile-section__heading">

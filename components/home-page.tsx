@@ -159,7 +159,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             <p className="eyebrow eyebrow--light">{profile.officesTitle}</p>
             <h2>{profile.contactTitle}</h2>
             <p>{profile.contactBody}</p>
-            <p className="profile-home-contact">{profile.phone} · {profile.email}</p>
+            <p className="profile-home-contact">{profile.contactPerson}</p>
           </div>
           <Link className="button button--light" href={routeFor(locale, "contact")}>
             {profile.contactCta}<span aria-hidden="true">↗</span>

@@ -9,7 +9,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     routeFor("id", "home"),
     routeFor("en", "home"),
-    ...pageSlugs.flatMap((slug) => [routeFor("id", slug), routeFor("en", slug)]),
+    ...pageSlugs
+      .filter((slug) => slug !== "careers" && slug !== "news")
+      .flatMap((slug) => [routeFor("id", slug), routeFor("en", slug)]),
   ];
 
   return paths.map((path) => ({

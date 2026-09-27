@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ContactIcons } from "@/components/contact-icons";
 import {
   copy,
   navigationSlugs,
@@ -29,13 +30,12 @@ export function SiteFooter({ locale, showPreviewNote }: { locale: Locale; showPr
         <div className="site-footer__column">
           <h2>{text.footerCompany}</h2>
           <Link href={routeFor(locale, "about")}>{text.pages.about.navLabel}</Link>
-          <Link href={routeFor(locale, "careers")}>{text.pages.careers.navLabel}</Link>
           <Link href={routeFor(locale, "contact")}>{text.pages.contact.navLabel}</Link>
         </div>
 
         <div className="site-footer__column">
           <h2>{text.footerExplore}</h2>
-          {navigationSlugs.slice(1, 7).map((slug) => (
+          {navigationSlugs.slice(1, 5).map((slug) => (
             <Link key={slug} href={routeFor(locale, slug)}>
               {text.pages[slug].navLabel}
             </Link>
@@ -53,6 +53,16 @@ export function SiteFooter({ locale, showPreviewNote }: { locale: Locale; showPr
       </div>
       <div className="site-footer__bottom content-width">
         <span>© {new Date().getFullYear()} {siteConfig.companyName}. {text.copyright}</span>
+        <a
+          className="site-footer__creator"
+          href="https://wa.me/628211406001?text=Halo%20RULIMENA_PROJECT"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={locale === "id" ? "Hubungi RULIMENA_PROJECT melalui WhatsApp" : "Contact RULIMENA_PROJECT on WhatsApp"}
+        >
+          <ContactIcons type="whatsapp" />
+          <span>{locale === "id" ? "Dibuat oleh" : "Created by"} <strong>RULIMENA_PROJECT</strong></span>
+        </a>
         {showPreviewNote && (
           <span className="site-footer__preview">{locale === "id" ? "Pratinjau situs" : "Website preview"}</span>
         )}

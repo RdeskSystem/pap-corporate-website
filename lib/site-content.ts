@@ -5,9 +5,8 @@ export const siteConfig = {
   logoPath: "/assets/brand/logo-primary.png",
   contact: {
     person: "Ahimsa",
-    email: "callcenter@papcorp.services",
     phone: "+62 821-4371-3602",
-    whatsapp: null,
+    whatsapp: "6282143713602",
     address: "Malang; Yogyakarta",
   },
 } as const;
@@ -158,44 +157,44 @@ export const copy: Record<Locale, LocaleCopy> = {
         eyebrow: "HUBUNGI KAMI",
         title: "Mari mulai percakapan yang tepat.",
         description:
-          "Hubungi Ahimsa melalui telepon atau email, atau kunjungi kantor PAP di Malang dan Yogyakarta.",
+          "Telepon Direktur atau isi formulir singkat untuk mengirim pertanyaan melalui WhatsApp.",
         statusTitle: "Hubungi PAP",
         statusBody:
-          "Nomor telepon, email, contact person, dan kantor di Malang serta Yogyakarta tersedia pada halaman kontak.",
-        pendingItems: ["Ahimsa — Direktur", "Nomor telepon", "Email perusahaan", "Alamat kantor"],
+          "Hubungi Direktur melalui panggilan telepon atau lanjutkan pertanyaan melalui WhatsApp.",
+        pendingItems: ["Telepon Direktur", "Formulir WhatsApp", "Layanan PAP", "Kantor Malang dan Yogyakarta"],
       },
       "privacy-policy": {
         navLabel: "Kebijakan Privasi",
         eyebrow: "INFORMASI LEGAL",
         title: "Kebijakan Privasi",
         description:
-          "Pemberitahuan privasi akan disusun berdasarkan proses pengumpulan, penggunaan, penyimpanan, dan penghapusan data yang sebenarnya.",
-        statusTitle: "Kebijakan privasi menunggu tinjauan",
+          "Cara PAP menggunakan informasi yang Anda isi dalam formulir pertanyaan dan kirim melalui WhatsApp.",
+        statusTitle: "Privasi dan pertanyaan bisnis",
         statusBody:
-          "Halaman ini belum berisi nasihat atau pernyataan legal. Persetujuan pihak perusahaan diperlukan sebelum formulir data pribadi diaktifkan.",
-        pendingItems: ["Tujuan dan dasar pemrosesan", "Masa retensi dan hak subjek data", "Kontak privasi", "Persetujuan dan pengelolaan cookie"],
+          "Formulir kontak diproses di peramban dan hanya diteruskan ke WhatsApp saat Anda memilih untuk membukanya.",
+        pendingItems: ["Informasi yang dimasukkan", "Tujuan penggunaan", "WhatsApp sebagai penerima", "Hak dan permintaan privasi"],
       },
       terms: {
         navLabel: "Syarat Penggunaan",
         eyebrow: "INFORMASI LEGAL",
         title: "Syarat Penggunaan",
         description:
-          "Ketentuan penggunaan situs akan dilengkapi dan ditinjau oleh pihak perusahaan sebelum diterbitkan.",
-        statusTitle: "Ketentuan penggunaan belum diterbitkan",
+          "Ketentuan untuk menggunakan situs PAP dan mengirim pertanyaan mengenai layanan perusahaan.",
+        statusTitle: "Penggunaan situs dan informasi layanan",
         statusBody:
-          "Konten legal tidak dibuat dengan mengarang kewajiban, pendaftaran, atau status hukum perusahaan.",
-        pendingItems: ["Ruang lingkup penggunaan", "Hak kekayaan intelektual", "Batas tanggung jawab", "Hukum dan mekanisme penyelesaian"],
+          "Informasi situs bersifat umum; ruang lingkup layanan ditetapkan melalui kesepakatan tertulis dengan klien.",
+        pendingItems: ["Penggunaan yang diperbolehkan", "Hak atas konten", "Informasi dan layanan", "Tautan pihak ketiga"],
       },
       "cookie-policy": {
         navLabel: "Kebijakan Cookie",
         eyebrow: "INFORMASI LEGAL",
         title: "Kebijakan Cookie",
         description:
-          "Informasi cookie akan disesuaikan dengan teknologi yang benar-benar digunakan dan pilihan privasi perusahaan.",
-        statusTitle: "Kebijakan cookie menunggu konfigurasi",
+          "Penggunaan cookie dan penyimpanan lokal pada situs publik PAP.",
+        statusTitle: "Cookie esensial saja",
         statusBody:
-          "Tidak ada ID analitik atau pelacakan pihak ketiga yang diklaim aktif pada pratinjau ini.",
-        pendingItems: ["Cookie esensial", "Analitik dan tujuan penggunaan", "Pihak ketiga", "Pengaturan dan masa simpan"],
+          "Situs publik tidak menggunakan cookie analitik atau iklan. Area admin menggunakan cookie sesi yang diperlukan untuk autentikasi.",
+        pendingItems: ["Cookie autentikasi admin", "Tidak ada cookie iklan", "Tidak ada analytics", "Pengaturan peramban"],
       },
     },
   },
@@ -299,44 +298,44 @@ export const copy: Record<Locale, LocaleCopy> = {
         eyebrow: "CONTACT",
         title: "Let’s start the right conversation.",
         description:
-          "Contact Ahimsa by phone or email, or visit PAP's offices in Malang and Yogyakarta.",
+          "Call the Director or fill out a short form to send an inquiry through WhatsApp.",
         statusTitle: "Contact PAP",
         statusBody:
-          "The contact person, phone, email and offices in Malang and Yogyakarta are listed on the contact page.",
-        pendingItems: ["Ahimsa — Director", "Phone number", "Company email", "Office addresses"],
+          "Call the Director or continue your inquiry through WhatsApp.",
+        pendingItems: ["Call the Director", "WhatsApp form", "PAP services", "Malang and Yogyakarta offices"],
       },
       "privacy-policy": {
         navLabel: "Privacy Policy",
         eyebrow: "LEGAL INFORMATION",
         title: "Privacy Policy",
         description:
-          "The privacy notice will reflect the actual processes for collecting, using, storing and deleting information.",
-        statusTitle: "Privacy policy under review",
+          "How PAP handles information entered in the inquiry form and sent through WhatsApp.",
+        statusTitle: "Privacy and business inquiries",
         statusBody:
-          "This page is not legal advice or a legal representation. Company approval is required before personal-data forms are enabled.",
-        pendingItems: ["Purpose and basis of processing", "Retention and data subject rights", "Privacy contact", "Consent and cookie management"],
+          "The contact form is processed in your browser and only passed to WhatsApp when you choose to open it.",
+        pendingItems: ["Information entered", "Purpose of use", "WhatsApp as recipient", "Privacy rights and requests"],
       },
       terms: {
         navLabel: "Terms of Use",
         eyebrow: "LEGAL INFORMATION",
         title: "Terms of Use",
         description:
-          "Website terms will be completed and reviewed by the company before publication.",
-        statusTitle: "Terms have not been published",
+          "Terms for using the PAP website and making service inquiries.",
+        statusTitle: "Website use and service information",
         statusBody:
-          "Legal content will not invent company obligations, registrations or legal status.",
-        pendingItems: ["Scope of use", "Intellectual property", "Limitation of liability", "Law and dispute resolution"],
+          "Website information is general; service scope is established through a written agreement with the client.",
+        pendingItems: ["Permitted use", "Content rights", "Information and services", "Third-party links"],
       },
       "cookie-policy": {
         navLabel: "Cookie Policy",
         eyebrow: "LEGAL INFORMATION",
         title: "Cookie Policy",
         description:
-          "Cookie information will match the technology actually used and the company's privacy choices.",
-        statusTitle: "Cookie policy awaiting configuration",
+          "How cookies and local storage are used on the PAP public website.",
+        statusTitle: "Essential cookies only",
         statusBody:
-          "No analytics ID or third-party tracking is represented as active in this preview.",
-        pendingItems: ["Essential cookies", "Analytics and purpose", "Third parties", "Preferences and retention"],
+          "The public website does not use advertising or analytics cookies. The admin area uses a session cookie required for authentication.",
+        pendingItems: ["Admin authentication cookie", "No advertising cookies", "No analytics", "Browser settings"],
       },
     },
   },
@@ -348,8 +347,6 @@ export const navigationSlugs: PageSlug[] = [
   "industries",
   "operations",
   "compliance",
-  "careers",
-  "news",
   "contact",
 ];
 
@@ -367,5 +364,8 @@ export function pageMetadata(locale: Locale, slug: PageSlug) {
   return {
     title: page.title,
     description: page.description,
+    ...((slug === "careers" || slug === "news")
+      ? { robots: { index: false, follow: false } }
+      : {}),
   };
 }

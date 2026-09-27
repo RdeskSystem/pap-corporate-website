@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { companyProfile } from "@/lib/company-profile";
+import { legalCopy } from "@/lib/legal-copy";
 import {
   copy,
+  navigationSlugs,
   pageSlugs,
+  pageMetadata,
   routeFor,
   siteConfig,
   type Locale,
@@ -36,9 +39,8 @@ describe("localized public content", () => {
     assert.equal(siteConfig.companyName, "PT Pelita Anugrah Perkasa");
     assert.deepEqual(siteConfig.contact, {
       person: "Ahimsa",
-      email: "callcenter@papcorp.services",
       phone: "+62 821-4371-3602",
-      whatsapp: null,
+      whatsapp: "6282143713602",
       address: "Malang; Yogyakarta",
     });
   });
@@ -51,7 +53,20 @@ describe("localized public content", () => {
       assert.ok(companyProfile[locale].certificateNumber);
       assert.ok(companyProfile[locale].fieldMetrics.length > 0);
     }
-    assert.equal(companyProfile.id.email, companyProfile.en.email);
     assert.equal(companyProfile.id.phone, companyProfile.en.phone);
+    assert.equal(companyProfile.id.whatsappPhone, companyProfile.en.whatsappPhone);
+  });
+
+  it("publishes bilingual legal pages while keeping unfinished careers and news out of indexing", () => {
+    for (const locale of ["id", "en"] satisfies Locale[]) {
+      for (const slug of ["privacy-policy", "terms", "cookie-policy"] as const) {
+        assert.ok(legalCopy[locale][slug].summary.trim());
+        assert.ok(legalCopy[locale][slug].sections.length >= 4);
+      }
+      assert.ok(!(navigationSlugs as readonly string[]).includes("careers"));
+      assert.ok(!(navigationSlugs as readonly string[]).includes("news"));
+      assert.deepEqual(pageMetadata(locale, "careers").robots, { index: false, follow: false });
+      assert.deepEqual(pageMetadata(locale, "news").robots, { index: false, follow: false });
+    }
   });
 });
