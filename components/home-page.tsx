@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
+import { ClientMarquee } from "@/components/client-marquee";
 import { companyProfile } from "@/lib/company-profile";
 import { routeFor, siteConfig, type Locale } from "@/lib/site-content";
 
@@ -38,9 +39,14 @@ export function HomePage({ locale }: { locale: Locale }) {
               <Image src={siteConfig.logoPath} width={84} height={84} alt={`${siteConfig.companyName} logo`} priority />
               <strong>{profile.heroVisualTitle}</strong>
             </div>
-            <div className="profile-home-stats">
-              <div><strong>{profile.employeeStat}</strong><span>{profile.employeeLabel}</span></div>
-              <div><strong>{profile.certificationStat}</strong><span>{profile.certificationLabel}</span></div>
+            <div className="hero-art__steps">
+              {profile.heroVisualSteps.map((step, index) => (
+                <div className="hero-art__step" key={step}>
+                  <span className="hero-art__step-number">0{index + 1}</span>
+                  <span>{step}</span>
+                  {index < profile.heroVisualSteps.length - 1 && <span className="hero-art__step-rule" aria-hidden="true" />}
+                </div>
+              ))}
             </div>
             <span className="hero-art__footnote">{siteConfig.companyName}</span>
           </div>
@@ -49,6 +55,28 @@ export function HomePage({ locale }: { locale: Locale }) {
           <span>{locale === "id" ? "LAYANAN OPERASIONAL & COLLECTION" : "OPERATIONAL & COLLECTION SERVICES"}</span>
           <span className="hero-bottom__rule" />
           <span>2026</span>
+        </div>
+        <div
+          className="profile-stat-strip content-width"
+          role="group"
+          aria-label={locale === "id" ? "Fakta perusahaan" : "Company facts"}
+        >
+          <article>
+            <strong>{profile.employeeStat}</strong>
+            <span>{locale === "id" ? "Karyawan bersertifikasi SPPI & AFPI" : "Employees certified by SPPI & AFPI"}</span>
+          </article>
+          <article>
+            <strong>{String(profile.services.length).padStart(2, "0")}</strong>
+            <span>{locale === "id" ? "Layanan utama" : "Core services"}</span>
+          </article>
+          <article>
+            <strong>{String(profile.clients.length).padStart(2, "0")}</strong>
+            <span>{locale === "id" ? "Klien tercantum di profil" : "Clients listed in the profile"}</span>
+          </article>
+          <article>
+            <strong>ISO/IEC 27001:2022</strong>
+            <span>{locale === "id" ? "Keamanan informasi" : "Information security"}</span>
+          </article>
         </div>
       </section>
 
@@ -111,22 +139,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="profile-home-clients section-pad content-width">
-        <div className="section-heading section-heading--split">
-          <div>
-            <p className="eyebrow">{profile.clientsTitle}</p>
-            <h2>{locale === "id" ? "Kolaborasi bersama berbagai mitra." : "Working together with our partners."}</h2>
-          </div>
-          <Link className="text-link" href={routeFor(locale, "industries")}>
-            {profile.learnMore}<span aria-hidden="true">→</span>
-          </Link>
-        </div>
-        <ul className="client-list client-list--compact">
-          {profile.clients.map((client, index) => (
-            <li key={client}><span>0{index + 1}</span><strong>{client}</strong></li>
-          ))}
-        </ul>
-      </section>
+      <ClientMarquee clients={profile.clients} locale={locale} />
 
       <section className="assurance-section section-pad content-width profile-home-certificate">
         <div className="assurance-section__symbol" aria-hidden="true">ISO</div>

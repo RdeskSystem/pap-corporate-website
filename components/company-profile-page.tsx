@@ -86,7 +86,7 @@ export function CompanyProfilePage({
         )}
 
         {slug === "services" && (
-          <section className="profile-section">
+          <section className="profile-section profile-section--services">
             <div className="profile-section__heading">
               <p className="eyebrow">{page.eyebrow}</p>
               <h2>{profile.servicesTitle}</h2>
