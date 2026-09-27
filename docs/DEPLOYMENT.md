@@ -27,6 +27,6 @@ After the project database is configured, apply migrations and seed system roles
 
 ## Current status
 
-An isolated preview is running at `https://papcorp.services` through `/etc/nginx/sites-available/papcorp.services.conf` and the `papcorp-web.service` systemd unit. Next.js listens only on `127.0.0.1:3102` as the dedicated `papcorp-web` user. A Let's Encrypt certificate is installed with automatic renewal. The preview remains noindex, with `PUBLICATION_APPROVED=false` and personal-data forms disabled. The existing SOPI/DUX services were left running; Nginx was gracefully reloaded after configuration checks.
+The company-profile site is running at `https://papcorp.services` through `/etc/nginx/sites-available/papcorp.services.conf` and the `papcorp-web.service` systemd unit. Next.js listens only on `127.0.0.1:3102` as the dedicated `papcorp-web` user. A Let's Encrypt certificate is installed with automatic renewal. The approved 2026 company profile supplies the published bilingual company, service, operations, certification, client, and contact content. The site remains noindex with `PUBLICATION_APPROVED=false` while legal-policy pages are pending; personal-data forms remain disabled. The existing SOPI/DUX services are separate.
 
-Project PostgreSQL, private media storage, transactional email, and admin bootstrap credentials have not been configured. This is an isolated site preview, not the final CMS/content production launch.
+Project PostgreSQL, private media storage, transactional email, and admin bootstrap credentials have not been configured. CMS publishing and public legal policies remain pending.

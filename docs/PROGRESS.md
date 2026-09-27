@@ -2,11 +2,11 @@
 
 ## Current status
 
-The greenfield workspace now has a bilingual public-site foundation, responsive design system, logo-derived assets, a validated Prisma schema/initial migration, role/permission seed, and an initial protected admin login/session/RBAC foundation. An isolated noindex preview is running at `https://papcorp.services` through a dedicated systemd service and Nginx TLS vhost. Public content remains neutral and explicitly pending company verification. There is no project database connection or admin account, and CMS content CRUD modules are not ready yet.
+The workspace has a bilingual public website, responsive design system, logo-derived assets, a validated Prisma schema/initial migration, role/permission seed, and an initial protected admin login/session/RBAC foundation. The approved 2026 company profile is presented across the public ID/EN company, services, operations, clients, certification, and contact pages. The site runs at `https://papcorp.services` through a dedicated systemd service and Nginx TLS vhost; it remains noindex while legal pages are unfinished. There is no project database connection or admin account, and CMS content CRUD modules are not ready yet.
 
-**Current phase:** Public website foundation and protected CMS foundation.
-**Current task:** Prepare for database-backed CMS modules and incorporate approved company information when received.
-**Current blockers:** Company document expected tomorrow; project database, private storage, transactional email, and privacy/contact workflow are not configured.
+**Current phase:** Approved public company profile and protected CMS foundation.
+**Current task:** Continue database-backed CMS modules and complete legal/privacy content and launch checks.
+**Current blockers:** Project database, private storage, transactional email, and legal/privacy workflow are not configured.
 
 ## Phase 1 — Discovery
 
@@ -41,12 +41,11 @@ The greenfield workspace now has a bilingual public-site foundation, responsive 
 
 - [x] Homepage foundation with the required section structure
 - [x] Responsive primary navigation and ID/EN route switching
-- [x] About, services, industries, operations and compliance placeholder states
+- [x] Approved company profile, services, client list, operations, certification and contact content in Indonesian and English
 - [x] Careers, news, contact and legal empty/pending states
 - [x] Metadata, noindex preview gate, robots, sitemap and manifest foundations
 - [x] 404, 500 and loading states
-- [ ] Verified company profile, service, industry and operations content
-- [ ] Approved legal text, contact details, vacancies, articles and certification evidence
+- [ ] Approved legal text, vacancies, articles and certification evidence asset
 - [ ] Structured data after verified company/domain details are available
 
 ## Phase 5 — CMS and backend
@@ -83,7 +82,7 @@ The greenfield workspace now has a bilingual public-site foundation, responsive 
 
 ## Blockers / pending inputs
 
-- Company document expected tomorrow: approved profile/positioning, verified service and industry scope, operating methodology, leadership/team, official contact person/phone/WhatsApp/email/address/hours/map, social links, active vacancies/news, privacy/legal wording, and evidence for certifications or other claims.
+- The approved Company Profile 2026 provides profile/positioning, services, operating methodology, clients, ISO certificate details, contact information, and office addresses. Office photography, social links, active vacancies/news, privacy/legal wording, and additional certification evidence are not included.
 - Project infrastructure: PostgreSQL connection, private object storage, transactional email, secret management, analytics choice, data-retention approval, and CMS owner/admin identities.
 - Contact and application forms remain inactive until a verified destination, secure persistence, privacy notice, file storage and notification workflow are configured.
 - Prisma is pinned to 6.12.0 because newer tested Prisma CLI dependency chains reported high-severity advisories. Re-evaluate and upgrade when a patched release can be validated; see ADR-004.
@@ -92,5 +91,5 @@ The greenfield workspace now has a bilingual public-site foundation, responsive 
 
 1. Configure project PostgreSQL, apply the reviewed migration, seed roles, and create the first admin through the guarded bootstrap command.
 2. Continue CMS CRUD modules, module-level permissions, reset/MFA flows, content preview/publish workflow, and private media handling.
-3. Add the company document after it arrives, keeping factual sections unpublished until approved.
+3. Complete legal/privacy content and decide when the indexing gate can be opened.
 4. Complete database-backed auth/API/CMS tests and security, accessibility, responsive, SEO, and end-to-end verification before production release.

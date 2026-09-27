@@ -1,6 +1,6 @@
 # PT Pelita Anugrah Perkasa — Corporate Website
 
-Initial bilingual (Indonesian/English) Next.js foundation for the PAP corporate website. The workspace was greenfield; requirements and architecture decisions are documented in [`docs/`](docs/).
+Indonesian/English Next.js corporate website for PT Pelita Anugrah Perkasa. Requirements and architecture decisions are documented in [`docs/`](docs/).
 
 ## Run locally
 
@@ -13,17 +13,19 @@ npm run dev -- --hostname 127.0.0.1 --port 3103
 
 Open `http://127.0.0.1:3103`. Indonesian is served at `/`; English at `/en`. The explicit dev port avoids the server's existing services on ports 3000 and 3001.
 
-## Current content status
+## Public company content
 
-This is an early preview at [https://papcorp.services](https://papcorp.services). Company facts, service scope, operating claims, contact details, vacancies, articles, certifications, and legal text are not yet supplied or verified. Pages show explicit pending states; no public form collects personal data. The site is noindex until company approval. Do not treat this preview as final corporate content.
+[`company_profile_detail.md`](company_profile_detail.md) is the approved 2026 company profile and canonical source for the public company facts and copy. Its approved contents are presented across the Indonesian and English home, company, services, clients, operations, certification, and contact pages.
 
-The current build uses `NEXT_PUBLIC_SITE_URL=https://papcorp.services`. Keep `PUBLICATION_APPROVED=false` until company facts, legal text, contact channels and the final public copy have been approved. The preview is noindex and excluded from the sitemap by default.
+The site is available at [https://papcorp.services](https://papcorp.services). Legal policy pages, careers, news, and the CMS/contact form remain in preparation; the site therefore remains noindex with `PUBLICATION_APPROVED=false` and is excluded from the sitemap. No public form collects personal data.
 
 ## Project map
 
 - `app/` — localized public routes, metadata, sitemap and robots.
 - `components/` — shared navigation, footer and page templates.
-- `lib/site-content.ts` — centralized ID/EN copy and safe placeholder contact fields.
+- `lib/site-content.ts` — localized routes, metadata copy, and approved company contact fields.
+- `lib/company-profile.ts` — localized company profile content used by the public pages.
+- `company_profile_detail.md` — approved source company profile for public content.
 - `prisma/schema.prisma` — CMS data model; `prisma/seed.ts` seeds system roles/permissions only.
 - `lib/auth/` — password hashing, opaque sessions, email-keyed login throttling, and permission checks.
 - `app/admin/` — protected login/dashboard foundation; CMS CRUD modules are pending.

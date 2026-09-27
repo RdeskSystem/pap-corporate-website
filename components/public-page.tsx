@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import {
+  CompanyProfilePage,
+  isCompanyProfileSlug,
+} from "@/components/company-profile-page";
+import {
   copy,
   routeFor,
   type Locale,
@@ -14,6 +18,10 @@ export function PublicPage({
   locale: Locale;
   slug: PageSlug;
 }) {
+  if (isCompanyProfileSlug(slug)) {
+    return <CompanyProfilePage locale={locale} slug={slug} />;
+  }
+
   const text = copy[locale];
   const page = text.pages[slug];
   const isLegal = slug === "privacy-policy" || slug === "terms" || slug === "cookie-policy";
@@ -38,13 +46,6 @@ export function PublicPage({
           <p className="eyebrow">{isLegal ? (locale === "id" ? "STATUS DOKUMEN" : "DOCUMENT STATUS") : (locale === "id" ? "PEMBARUAN KONTEN" : "CONTENT UPDATE")}</p>
           <h2>{page.statusTitle}</h2>
           <p className="page-content__lead">{page.statusBody}</p>
-          {slug === "contact" && (
-            <p className="contact-hold-note">
-              {locale === "id"
-                ? "Formulir belum mengumpulkan data apa pun. Pengiriman baru akan diaktifkan setelah tujuan kontak, penyimpanan aman, dan pemberitahuan privasi siap."
-                : "The form does not collect any information yet. Submissions will be enabled after a verified contact destination, secure storage and privacy notice are ready."}
-            </p>
-          )}
         </div>
         <div className="pending-list" aria-label={locale === "id" ? "Informasi yang akan dilengkapi" : "Information to be completed"}>
           <div className="pending-list__heading">

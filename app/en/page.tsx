@@ -4,7 +4,7 @@ import { routeFor, siteConfig } from "@/lib/site-content";
 
 export const metadata: Metadata = {
   title: "Home",
-  description: `Official information about ${siteConfig.companyName}.`,
+  description: `${siteConfig.companyName} provides desk collection, collection management, reporting and labor supply services.`,
   alternates: {
     ...(process.env.NEXT_PUBLIC_SITE_URL ? { canonical: routeFor("en", "home") } : {}),
     languages: { id: routeFor("id", "home"), en: routeFor("en", "home") },

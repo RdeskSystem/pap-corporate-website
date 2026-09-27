@@ -4,11 +4,11 @@ export const siteConfig = {
   companyName: "PT Pelita Anugrah Perkasa",
   logoPath: "/assets/brand/logo-primary.png",
   contact: {
-    person: null,
-    email: null,
-    phone: null,
+    person: "Ahimsa",
+    email: "callcenter@papcorp.services",
+    phone: "+62 821-4371-3602",
     whatsapp: null,
-    address: null,
+    address: "Malang; Yogyakarta",
   },
 } as const;
 
@@ -39,41 +39,6 @@ export interface PageCopy {
   pendingItems: string[];
 }
 
-interface HomeCopy {
-  eyebrow: string;
-  title: string;
-  description: string;
-  primaryCta: string;
-  secondaryCta: string;
-  visualLabel: string;
-  visualTitle: string;
-  visualSteps: string[];
-  introEyebrow: string;
-  introTitle: string;
-  introBody: string;
-  exploreEyebrow: string;
-  exploreTitle: string;
-  exploreBody: string;
-  processEyebrow: string;
-  processTitle: string;
-  processBody: string;
-  processSteps: string[];
-  processNote: string;
-  technologyEyebrow: string;
-  technologyTitle: string;
-  technologyBody: string;
-  technologyLabel: string;
-  technologyFootnote: string;
-  technologyCta: string;
-  discoveryEyebrow: string;
-  discoveryTitle: string;
-  discoveryBody: string;
-  closingEyebrow: string;
-  closingTitle: string;
-  closingBody: string;
-  closingCta: string;
-}
-
 interface LocaleCopy {
   localeName: string;
   previewNotice: string;
@@ -89,7 +54,6 @@ interface LocaleCopy {
   footerLegal: string;
   copyright: string;
   backHome: string;
-  home: HomeCopy;
   pages: Record<PageSlug, PageCopy>;
 }
 
@@ -97,7 +61,7 @@ export const copy: Record<Locale, LocaleCopy> = {
   id: {
     localeName: "Bahasa Indonesia",
     previewNotice:
-      "Pratinjau awal · informasi perusahaan dan kanal kontak resmi akan dilengkapi setelah dikonfirmasi.",
+      "Pratinjau profil perusahaan · konten bersumber dari Company Profile 2026 yang disetujui. Informasi legal masih disiapkan.",
     navigationLabel: "Navigasi utama",
     homeLabel: "Beranda",
     menuOpen: "Buka menu",
@@ -105,108 +69,67 @@ export const copy: Record<Locale, LocaleCopy> = {
     languageLabel: "Pilih bahasa",
     partnerCta: "Jadilah Mitra Kami",
     footerDescription:
-      `Informasi resmi ${siteConfig.companyName} sedang disiapkan untuk ditampilkan secara akurat dan bertanggung jawab.`,
+      `Layanan operasional, desk collection, dan labor supply oleh ${siteConfig.companyName}.`,
     footerCompany: "Perusahaan",
     footerExplore: "Jelajahi",
     footerLegal: "Informasi legal",
     copyright: "Hak cipta dilindungi.",
     backHome: "Kembali ke Beranda",
-    home: {
-      eyebrow: "PROFIL PERUSAHAAN",
-      title: "Kemitraan yang kuat dimulai dari kejelasan.",
-      description:
-        `Kami sedang menyiapkan informasi resmi ${siteConfig.companyName}. Cakupan layanan, pendekatan operasional, dan detail perusahaan akan diperbarui setelah dikonfirmasi.`,
-      primaryCta: "Kenali PAP",
-      secondaryCta: "Informasi kontak",
-      visualLabel: "KERANGKA ILUSTRATIF",
-      visualTitle: "Kolaborasi yang terarah",
-      visualSteps: ["Pahami kebutuhan", "Susun pendekatan", "Evaluasi bersama"],
-      introEyebrow: "TENTANG PAP",
-      introTitle: "Mengenal perusahaan melalui informasi yang terverifikasi.",
-      introBody:
-        "Profil, visi, tim, dan riwayat perusahaan akan disampaikan berdasarkan dokumen resmi yang telah ditinjau.",
-      exploreEyebrow: "LAYANAN",
-      exploreTitle: "Cakupan layanan ditampilkan setelah dikonfirmasi.",
-      exploreBody:
-        "Struktur halaman telah disiapkan. Rincian bisnis akan ditampilkan setelah ruang lingkupnya dikonfirmasi oleh perusahaan.",
-      processEyebrow: "PENDEKATAN KERJA",
-      processTitle: "Kejelasan di setiap tahap kolaborasi.",
-      processBody:
-        "Diagram berikut adalah kerangka ilustratif untuk menjelaskan informasi yang nantinya akan disesuaikan dengan metodologi resmi PAP.",
-      processSteps: ["Kebutuhan", "Perencanaan", "Pelaksanaan", "Evaluasi"],
-      processNote: "Ilustrasi konsep · bukan pernyataan SOP atau proses operasional yang telah disahkan.",
-      technologyEyebrow: "TEKNOLOGI & PELAPORAN",
-      technologyTitle: "Informasi yang relevan, pada saat dibutuhkan.",
-      technologyBody:
-        "Penjelasan tentang platform, pengukuran, dan pelaporan akan disesuaikan setelah proses dan sistem yang digunakan dikonfirmasi.",
-      technologyLabel: "KERANGKA TAMPILAN · ILUSTRATIF",
-      technologyFootnote: "Tampilan contoh tidak menggunakan data operasional.",
-      technologyCta: "Lihat pendekatan operasional",
-      discoveryEyebrow: "LEBIH LANJUT",
-      discoveryTitle: "Setiap informasi berangkat dari konfirmasi.",
-      discoveryBody:
-        "Cakupan industri, peluang karier, dan kabar perusahaan akan ditambahkan dari sumber resmi.",
-      closingEyebrow: "LANGKAH BERIKUTNYA",
-      closingTitle: "Mari mulai dengan percakapan yang tepat.",
-      closingBody:
-        "Kanal kontak resmi akan ditambahkan setelah detail PIC, telepon, WhatsApp, dan email dikonfirmasi.",
-      closingCta: "Lihat status kontak",
-    },
     pages: {
       about: {
         navLabel: "Tentang",
         eyebrow: "TENTANG PERUSAHAAN",
         title: `Tentang ${siteConfig.companyName}`,
         description:
-          "Profil, visi, misi, nilai, dan perjalanan perusahaan akan disusun dari informasi resmi yang telah ditinjau.",
-        statusTitle: "Profil perusahaan sedang disiapkan",
+          "Profil, visi, misi, dan nilai PT Pelita Anugrah Perkasa.",
+        statusTitle: "Tentang PT Pelita Anugrah Perkasa",
         statusBody:
-          "Informasi faktual belum dimasukkan hingga dokumen perusahaan diterima dan disetujui.",
-        pendingItems: ["Gambaran perusahaan", "Visi, misi, dan nilai", "Kepemimpinan dan tim", "Riwayat perusahaan"],
+          "Profil, visi, misi, dan nilai perusahaan tersedia berdasarkan Company Profile 2026.",
+        pendingItems: ["Gambaran perusahaan", "Visi dan misi", "Nilai perusahaan", "Tenaga kerja"],
       },
       services: {
         navLabel: "Layanan",
         eyebrow: "LAYANAN",
-        title: "Layanan yang relevan, dijelaskan dengan jelas.",
+        title: "Layanan operasional dan collection.",
         description:
-          "Ruang lingkup layanan akan ditampilkan setelah nama, ketersediaan, dan kapabilitasnya dikonfirmasi oleh perusahaan.",
-        statusTitle: "Ruang lingkup layanan menunggu konfirmasi",
+          "Desk collection, collection management, data management, reporting, dan labor supply.",
+        statusTitle: "Empat layanan utama PAP",
         statusBody:
-          "Kategori dalam brief proyek masih berupa arah editorial dan belum dianggap sebagai daftar layanan resmi.",
-        pendingItems: ["Nama dan deskripsi layanan", "Kapabilitas dan proses", "Manfaat dan FAQ", "Industri terkait"],
+          "Desk collection, collection management, data management dan reporting system, serta labor supply.",
+        pendingItems: ["Desk collection", "Collection management", "Data management dan reporting", "Labor supply"],
       },
       industries: {
-        navLabel: "Industri",
-        eyebrow: "INDUSTRI",
-        title: "Memahami konteks setiap industri.",
+        navLabel: "Klien",
+        eyebrow: "KLIEN KAMI",
+        title: "Mitra yang telah bekerja sama dengan PAP.",
         description:
-          "Halaman ini akan menjelaskan konteks dan pendekatan yang relevan setelah cakupan industri PAP diverifikasi.",
-        statusTitle: "Cakupan industri belum dipublikasikan",
+          "Daftar klien PT Pelita Anugrah Perkasa berdasarkan Company Profile 2026.",
+        statusTitle: "Klien PAP",
         statusBody:
-          "Kategori industri tidak menunjukkan bahwa PAP telah melayani atau memiliki klien pada sektor tersebut.",
-        pendingItems: ["Cakupan yang disetujui", "Tantangan dan konteks", "Kapabilitas terkait", "Pendekatan operasional"],
+          "Daftar mitra bisnis dicantumkan pada halaman klien berdasarkan profil perusahaan yang disetujui.",
+        pendingItems: ["Traveloka", "Bussan Auto Finance", "Akulaku", "BCA dan mitra lainnya"],
       },
       operations: {
         navLabel: "Operasional",
         eyebrow: "OPERASIONAL",
-        title: "Proses yang jelas mendukung kolaborasi yang terukur.",
+        title: "Proses desk collection dan sistem collection.",
         description:
-          "Metodologi, tata kelola, pengawasan, dan pelaporan akan dijelaskan setelah proses resmi dikonfirmasi.",
-        statusTitle: "Metodologi operasional menunggu tinjauan",
+          "Alur kerja desk collection, kriteria account, metrik, dan sistem yang digunakan PAP.",
+        statusTitle: "Alur desk collection",
         statusBody:
-          "Diagram atau uraian di halaman ini tidak akan menyatakan SOP aktual sebelum disetujui perusahaan.",
-        pendingItems: ["Alur kerja resmi", "Pemantauan dan jaminan kualitas", "Pelaporan", "Eskalasi dan koordinasi"],
+          "Halaman operasional menjelaskan proses, kriteria, indikator, dan sistem collection dari Company Profile 2026.",
+        pendingItems: ["Assignment dan campaign", "Desk collection", "Segmented account", "Field collection"],
       },
       compliance: {
         navLabel: "Kepatuhan",
         eyebrow: "TATA KELOLA & TANGGUNG JAWAB",
-        title: "Kepercayaan dibangun melalui tanggung jawab.",
+        title: "Sertifikasi ISO/IEC 27001:2022.",
         description:
-          "Informasi kebijakan, privasi, perilaku, keamanan, dan sertifikasi hanya akan ditampilkan berdasarkan bukti dan persetujuan yang sesuai.",
-        statusTitle: "Pernyataan kepatuhan belum dipublikasikan",
+          "Informasi sertifikasi sistem manajemen keamanan informasi, keamanan siber, dan perlindungan privasi PAP.",
+        statusTitle: "Sertifikasi ISO/IEC 27001:2022",
         statusBody:
-          "Tidak ada sertifikasi atau status regulasi yang dicantumkan tanpa dokumen pendukung yang telah diverifikasi.",
-        pendingItems: ["Kebijakan operasional", "Privasi dan perlindungan data", "Pengawasan dan eskalasi", "Sertifikasi terverifikasi"],
+          "Ruang lingkup dan tanggal sertifikasi ditampilkan mengikuti informasi dalam Company Profile 2026.",
+        pendingItems: ["Keamanan informasi", "Keamanan siber", "Perlindungan privasi", "Ruang lingkup sertifikasi"],
       },
       careers: {
         navLabel: "Karier",
@@ -235,11 +158,11 @@ export const copy: Record<Locale, LocaleCopy> = {
         eyebrow: "HUBUNGI KAMI",
         title: "Mari mulai percakapan yang tepat.",
         description:
-          "Kanal kontak resmi akan ditambahkan setelah informasi PIC dan detail perusahaan diterima.",
-        statusTitle: "Informasi kontak sedang dikonfirmasi",
+          "Hubungi Ahimsa melalui telepon atau email, atau kunjungi kantor PAP di Malang dan Yogyakarta.",
+        statusTitle: "Hubungi PAP",
         statusBody:
-          "Email, telepon, WhatsApp, alamat, jam operasional, dan formulir bisnis belum diaktifkan agar pesan tidak terkirim ke tujuan yang keliru.",
-        pendingItems: ["Nama contact person", "Email dan nomor telepon / WhatsApp", "Alamat dan jam operasional", "Formulir dan tujuan notifikasi"],
+          "Nomor telepon, email, contact person, dan kantor di Malang serta Yogyakarta tersedia pada halaman kontak.",
+        pendingItems: ["Ahimsa — Direktur", "Nomor telepon", "Email perusahaan", "Alamat kantor"],
       },
       "privacy-policy": {
         navLabel: "Kebijakan Privasi",
@@ -279,7 +202,7 @@ export const copy: Record<Locale, LocaleCopy> = {
   en: {
     localeName: "English",
     previewNotice:
-      "Early preview · official company information and contact channels will be added after confirmation.",
+      "Company profile preview · content is based on the approved 2026 Company Profile. Legal information is still being prepared.",
     navigationLabel: "Main navigation",
     homeLabel: "Home",
     menuOpen: "Open menu",
@@ -287,108 +210,67 @@ export const copy: Record<Locale, LocaleCopy> = {
     languageLabel: "Choose language",
     partnerCta: "Partner With Us",
     footerDescription:
-      `Official information about ${siteConfig.companyName} is being prepared for accurate and responsible publication.`,
+      `Operational, desk collection and labor supply services by ${siteConfig.companyName}.`,
     footerCompany: "Company",
     footerExplore: "Explore",
     footerLegal: "Legal information",
     copyright: "All rights reserved.",
     backHome: "Back to Home",
-    home: {
-      eyebrow: "CORPORATE PROFILE",
-      title: "Strong partnerships begin with clarity.",
-      description:
-        `We are preparing official information about ${siteConfig.companyName}. Service scope, operating approach and company details will be updated once confirmed.`,
-      primaryCta: "Discover PAP",
-      secondaryCta: "Contact information",
-      visualLabel: "ILLUSTRATIVE FRAMEWORK",
-      visualTitle: "Purposeful collaboration",
-      visualSteps: ["Understand needs", "Shape an approach", "Review together"],
-      introEyebrow: "ABOUT PAP",
-      introTitle: "Get to know the company through verified information.",
-      introBody:
-        "The company profile, vision, team and history will be presented from reviewed official documents.",
-      exploreEyebrow: "SERVICES",
-      exploreTitle: "Service scope will be shared once confirmed.",
-      exploreBody:
-        "The page structure is ready. Business details will be added after their scope has been confirmed by the company.",
-      processEyebrow: "WORKING APPROACH",
-      processTitle: "Clarity at every stage of collaboration.",
-      processBody:
-        "The diagram below is an illustrative framework; it will be aligned with PAP's official methodology when confirmed.",
-      processSteps: ["Needs", "Planning", "Delivery", "Review"],
-      processNote: "Concept illustration · not a statement of approved SOPs or operating processes.",
-      technologyEyebrow: "TECHNOLOGY & REPORTING",
-      technologyTitle: "Relevant information, when it is needed.",
-      technologyBody:
-        "Details about platforms, measurement and reporting will be aligned with the actual processes and systems once confirmed.",
-      technologyLabel: "ILLUSTRATIVE INTERFACE FRAMEWORK",
-      technologyFootnote: "This conceptual view contains no operational data.",
-      technologyCta: "Explore the operating approach",
-      discoveryEyebrow: "DISCOVER MORE",
-      discoveryTitle: "Every detail starts with confirmation.",
-      discoveryBody:
-        "Industry scope, career opportunities and company news will be added from official sources.",
-      closingEyebrow: "NEXT STEP",
-      closingTitle: "Let’s start with the right conversation.",
-      closingBody:
-        "Official contact channels will be added after the contact person, phone, WhatsApp and email are confirmed.",
-      closingCta: "View contact status",
-    },
     pages: {
       about: {
         navLabel: "About",
         eyebrow: "ABOUT THE COMPANY",
         title: `About ${siteConfig.companyName}`,
         description:
-          "The company profile, vision, mission, values and history will be prepared from reviewed official information.",
-        statusTitle: "Company profile in preparation",
+          "The profile, vision, mission and values of PT Pelita Anugrah Perkasa.",
+        statusTitle: "About PT Pelita Anugrah Perkasa",
         statusBody:
-          "Factual information will be added after the company document is received and approved.",
-        pendingItems: ["Company overview", "Vision, mission and values", "Leadership and team", "Company history"],
+          "The company profile, vision, mission and values are based on the approved 2026 Company Profile.",
+        pendingItems: ["Company overview", "Vision and mission", "Company values", "Workforce"],
       },
       services: {
         navLabel: "Services",
         eyebrow: "SERVICES",
-        title: "Relevant services, explained clearly.",
+        title: "Operational and collection services.",
         description:
-          "Service scope will be published once the company confirms its names, availability and capabilities.",
-        statusTitle: "Service scope awaiting confirmation",
+          "Desk collection, collection management, data management, reporting and labor supply.",
+        statusTitle: "PAP’s four core services",
         statusBody:
-          "Categories in the project brief are editorial direction only and are not yet an official service list.",
-        pendingItems: ["Service names and descriptions", "Capabilities and process", "Benefits and FAQs", "Related industries"],
+          "Desk collection, collection management, data management and reporting systems, and labor supply.",
+        pendingItems: ["Desk collection", "Collection management", "Data management and reporting", "Labor supply"],
       },
       industries: {
-        navLabel: "Industries",
-        eyebrow: "INDUSTRIES",
-        title: "Understanding the context of each industry.",
+        navLabel: "Clients",
+        eyebrow: "OUR CLIENTS",
+        title: "Partners who have worked with PAP.",
         description:
-          "This page will explain relevant context and approaches after PAP's industry scope has been verified.",
-        statusTitle: "Industry coverage not yet published",
+          "Clients of PT Pelita Anugrah Perkasa, as listed in the 2026 Company Profile.",
+        statusTitle: "PAP clients",
         statusBody:
-          "An industry category does not imply that PAP has served or has clients in that sector.",
-        pendingItems: ["Approved coverage", "Challenges and context", "Related capabilities", "Operating approach"],
+          "Business partners are listed on the clients page based on the approved company profile.",
+        pendingItems: ["Traveloka", "Bussan Auto Finance", "Akulaku", "BCA and other partners"],
       },
       operations: {
         navLabel: "Operations",
         eyebrow: "OPERATIONS",
-        title: "Clear processes support measurable collaboration.",
+        title: "Desk collection workflow and collection systems.",
         description:
-          "Methodology, governance, monitoring and reporting will be explained after the official process is confirmed.",
-        statusTitle: "Operating methodology under review",
+          "Desk collection workflow, account criteria, metrics and systems used by PAP.",
+        statusTitle: "Desk collection workflow",
         statusBody:
-          "This page will not describe a process or SOP as current until it is approved by the company.",
-        pendingItems: ["Approved workflow", "Monitoring and quality assurance", "Reporting", "Escalation and coordination"],
+          "The operations page explains the process, criteria, indicators and collection systems from the 2026 Company Profile.",
+        pendingItems: ["Assignment and campaign", "Desk collection", "Segmented account", "Field collection"],
       },
       compliance: {
         navLabel: "Compliance",
         eyebrow: "GOVERNANCE & RESPONSIBILITY",
-        title: "Trust is built through responsibility.",
+        title: "ISO/IEC 27001:2022 certification.",
         description:
-          "Policy, privacy, conduct, security and certification information will only appear with appropriate evidence and approval.",
-        statusTitle: "Compliance statements not yet published",
+          "Information about PAP's information security management, cybersecurity and privacy protection certification.",
+        statusTitle: "ISO/IEC 27001:2022 certification",
         statusBody:
-          "No certification or regulatory status will be listed without verified supporting documentation.",
-        pendingItems: ["Operating policies", "Privacy and data protection", "Monitoring and escalation", "Verified certifications"],
+          "The certification scope and dates are presented as supplied in the approved 2026 Company Profile.",
+        pendingItems: ["Information security", "Cybersecurity", "Privacy protection", "Certification scope"],
       },
       careers: {
         navLabel: "Careers",
@@ -417,11 +299,11 @@ export const copy: Record<Locale, LocaleCopy> = {
         eyebrow: "CONTACT",
         title: "Let’s start the right conversation.",
         description:
-          "Official contact channels will be added after the company contact person and details are provided.",
-        statusTitle: "Contact information being confirmed",
+          "Contact Ahimsa by phone or email, or visit PAP's offices in Malang and Yogyakarta.",
+        statusTitle: "Contact PAP",
         statusBody:
-          "Email, phone, WhatsApp, address, business hours and the inquiry form are not enabled yet, so messages are not sent to an unverified destination.",
-        pendingItems: ["Contact person", "Email and phone / WhatsApp", "Address and business hours", "Form and notification destination"],
+          "The contact person, phone, email and offices in Malang and Yogyakarta are listed on the contact page.",
+        pendingItems: ["Ahimsa — Director", "Phone number", "Company email", "Office addresses"],
       },
       "privacy-policy": {
         navLabel: "Privacy Policy",

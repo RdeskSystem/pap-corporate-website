@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { companyProfile } from "@/lib/company-profile";
 import {
   copy,
   pageSlugs,
@@ -31,14 +32,26 @@ describe("localized public content", () => {
     }
   });
 
-  it("does not invent contact channels before approved company data is provided", () => {
+  it("uses contact information from the approved company profile", () => {
     assert.equal(siteConfig.companyName, "PT Pelita Anugrah Perkasa");
     assert.deepEqual(siteConfig.contact, {
-      person: null,
-      email: null,
-      phone: null,
+      person: "Ahimsa",
+      email: "callcenter@papcorp.services",
+      phone: "+62 821-4371-3602",
       whatsapp: null,
-      address: null,
+      address: "Malang; Yogyakarta",
     });
+  });
+
+  it("provides approved profile facts in both locales", () => {
+    for (const locale of ["id", "en"] satisfies Locale[]) {
+      assert.equal(companyProfile[locale].services.length, 4);
+      assert.equal(companyProfile[locale].clients.length, 10);
+      assert.equal(companyProfile[locale].offices.length, 2);
+      assert.ok(companyProfile[locale].certificateNumber);
+      assert.ok(companyProfile[locale].fieldMetrics.length > 0);
+    }
+    assert.equal(companyProfile.id.email, companyProfile.en.email);
+    assert.equal(companyProfile.id.phone, companyProfile.en.phone);
   });
 });
