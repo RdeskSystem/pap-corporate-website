@@ -260,7 +260,6 @@ export function CompanyProfilePage({
                   </article>
                 ))}
               </div>
-              <p className="profile-note">{profile.photoNote}</p>
             </section>
           </>
         )}

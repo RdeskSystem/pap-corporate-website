@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./visual-refresh.css";
 import "@fontsource-variable/manrope/index.css";
 import { siteConfig } from "@/lib/site-content";
 
