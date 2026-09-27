@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
 import { routeFor, type Locale } from "@/lib/site-content";
 
 export function ClientMarquee({
@@ -11,7 +8,6 @@ export function ClientMarquee({
   clients: readonly string[];
   locale: Locale;
 }) {
-  const [manuallyPaused, setManuallyPaused] = useState(false);
   const isIndonesian = locale === "id";
   const group = (isDuplicate: boolean) => (
     <ul
@@ -37,27 +33,19 @@ export function ClientMarquee({
           </h2>
         </div>
         <div className="client-marquee__actions">
-          <button
-            className="client-marquee__toggle"
-            type="button"
-            aria-controls="client-marquee-track"
-            aria-pressed={manuallyPaused}
-            aria-label={isIndonesian
-              ? (manuallyPaused ? "Lanjutkan animasi logo klien" : "Jeda animasi logo klien")
-              : (manuallyPaused ? "Resume client logo animation" : "Pause client logo animation")}
-            onClick={() => setManuallyPaused((paused) => !paused)}
-          >
-            <span aria-hidden="true">{manuallyPaused ? "▶" : "Ⅱ"}</span>
-            {isIndonesian ? (manuallyPaused ? "Lanjutkan" : "Jeda animasi") : (manuallyPaused ? "Resume" : "Pause animation")}
-          </button>
           <Link className="text-link" href={routeFor(locale, "industries")}>
             {isIndonesian ? "Lihat semua klien" : "View all clients"}<span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>
 
-      <div className={`client-marquee${manuallyPaused ? " is-paused" : ""}`}>
-        <div className="client-marquee__viewport">
+      <div className="client-marquee">
+        <div
+          className="client-marquee__viewport"
+          role="region"
+          tabIndex={0}
+          aria-label={isIndonesian ? "Nama klien, fokus untuk menjeda animasi" : "Client names, focus to pause animation"}
+        >
           <div
             className="client-marquee__track"
             id="client-marquee-track"
@@ -67,11 +55,6 @@ export function ClientMarquee({
           </div>
         </div>
       </div>
-      <p className="client-marquee__hint">
-        {isIndonesian
-          ? "Arahkan kursor ke nama klien untuk menjeda."
-          : "Hover over a client name to pause."}
-      </p>
     </section>
   );
 }

@@ -22,7 +22,7 @@ The site is available at [https://papcorp.services](https://papcorp.services). L
 ## Project map
 
 - `app/` — localized public routes, metadata, sitemap and robots.
-- `components/` — shared navigation, footer and page templates; the client-name marquee pauses on hover and supports manual pause.
+- `components/` — shared navigation, footer and page templates; the client-name marquee pauses on hover and keyboard focus.
 - `app/visual-refresh.css` — responsive PAP-branded editorial styling, motion, and reduced-motion support.
 - `lib/site-content.ts` — localized routes, metadata copy, and approved company contact fields.
 - `lib/company-profile.ts` — localized company profile content used by the public pages.
