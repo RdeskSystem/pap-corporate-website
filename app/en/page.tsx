@@ -3,11 +3,21 @@ import { HomePage } from "@/components/home-page";
 import { routeFor, siteConfig } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: `${siteConfig.companyName} provides desk collection, collection management, reporting and labor supply services.`,
+  title: "Desk Collection Services",
+  description: `${siteConfig.companyName} provides desk collection, collection management, reporting and labor supply for business operations in Indonesia.`,
   alternates: {
     ...(process.env.NEXT_PUBLIC_SITE_URL ? { canonical: routeFor("en", "home") } : {}),
     languages: { id: routeFor("id", "home"), en: routeFor("en", "home") },
+  },
+  openGraph: {
+    title: "Desk Collection Services",
+    description: `${siteConfig.companyName} provides desk collection, collection management, reporting and labor supply for business operations in Indonesia.`,
+    url: routeFor("en", "home"),
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Desk Collection Services",
+    description: `${siteConfig.companyName} provides desk collection, collection management, reporting and labor supply for business operations in Indonesia.`,
   },
 };
 

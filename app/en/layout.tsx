@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: siteConfig.companyName,
     template: `%s | ${siteConfig.companyName}`,
   },
-  description: `Official information about ${siteConfig.companyName}.`,
+  description: `${siteConfig.companyName} provides desk collection, collection management, labor supply and operational outsourcing services in Indonesia.`,
   robots: {
     index: publicationApproved,
     follow: publicationApproved,
@@ -21,13 +21,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     siteName: siteConfig.companyName,
     title: siteConfig.companyName,
-    description: `Official information about ${siteConfig.companyName}.`,
+    description: `${siteConfig.companyName} provides desk collection, collection management, labor supply and operational outsourcing services in Indonesia.`,
     ...(socialImage ? { images: [{ url: socialImage, width: 1200, height: 630, alt: siteConfig.companyName }] } : {}),
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.companyName,
-    description: `Official information about ${siteConfig.companyName}.`,
+    description: `${siteConfig.companyName} provides desk collection, collection management, labor supply and operational outsourcing services in Indonesia.`,
     ...(socialImage ? { images: [socialImage] } : {}),
   },
 };

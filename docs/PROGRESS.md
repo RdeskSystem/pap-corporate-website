@@ -73,6 +73,7 @@ The workspace has a bilingual public website, responsive PAP-branded design, log
 - [x] Isolated `papcorp-web` service, domain vhost, TLS certificate, and graceful Nginx reload
 - [x] Prisma schema validation and client generation
 - [x] Dependency audit (0 reported vulnerabilities with the current lockfile)
+- [ ] Verify `papcorp.services` in Google Search Console and submit the sitemap
 - [ ] Database-backed login/session/RBAC integration tests
 - [ ] API/CMS/E2E tests
 - [ ] Accessibility and responsive manual verification
@@ -92,4 +93,5 @@ The workspace has a bilingual public website, responsive PAP-branded design, log
 1. Configure project PostgreSQL, apply the reviewed migration, seed roles, and create the first admin through the guarded bootstrap command.
 2. Continue CMS CRUD modules, module-level permissions, reset/MFA flows, content preview/publish workflow, and private media handling.
 3. Supply approved careers/news content and real office/certification imagery before publishing those sections.
-4. Complete database-backed auth/API/CMS tests and security, accessibility, responsive, SEO, and end-to-end verification before production release.
+4. Verify the domain and submit `https://papcorp.services/sitemap.xml` in Google Search Console.
+5. Complete database-backed auth/API/CMS tests and security, accessibility, responsive, SEO, and end-to-end verification before production release.

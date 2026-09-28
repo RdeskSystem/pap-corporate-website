@@ -17,7 +17,7 @@ Open `http://127.0.0.1:3103`. Indonesian is served at `/`; English at `/en`. The
 
 [`company_profile_detail.md`](company_profile_detail.md) is the approved 2026 company profile and canonical source for the public company facts and copy. Its approved contents are presented across the Indonesian and English home, company, services, clients, operations, certification, and contact pages.
 
-The site is available at [https://papcorp.services](https://papcorp.services). Bilingual privacy, terms, and cookie pages are published. Careers and news remain unpublished, unlinked, and excluded from the sitemap. The contact form prepares a message in the visitor's browser and passes it to WhatsApp only when the visitor chooses to continue; PAP's site does not store its contents. The approved production deployment is indexable.
+The site is available at [https://papcorp.services](https://papcorp.services). Bilingual privacy, terms, and cookie pages are published. Careers and news remain unpublished, unlinked, and excluded from the sitemap. The contact form prepares a message in the visitor's browser and passes it to WhatsApp only when the visitor chooses to continue; PAP's site does not store its contents. The approved production deployment is indexable. Verify the domain in Google Search Console and submit `https://papcorp.services/sitemap.xml` to start Google's crawl workflow.
 
 ## Project map
 

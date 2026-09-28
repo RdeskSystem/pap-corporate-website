@@ -69,4 +69,15 @@ describe("localized public content", () => {
       assert.deepEqual(pageMetadata(locale, "news").robots, { index: false, follow: false });
     }
   });
+
+  it("keeps localized page titles and descriptions useful for search snippets", () => {
+    for (const locale of ["id", "en"] satisfies Locale[]) {
+      for (const slug of pageSlugs) {
+        const metadata = pageMetadata(locale, slug);
+        assert.ok(metadata.title.length + siteConfig.companyName.length + 3 <= 70, `${locale}/${slug} title should stay concise`);
+        assert.ok(metadata.description.length <= 160, `${locale}/${slug} description should fit a search snippet`);
+        assert.equal(metadata.openGraph?.description, metadata.description);
+      }
+    }
+  });
 });

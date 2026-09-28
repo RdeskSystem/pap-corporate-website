@@ -20,4 +20,4 @@ Use clean localized URLs and natural Indonesian/English language. Target relevan
 
 ## Current dependency
 
-The company domain, contact/location, service scope, company description, and legal pages are published from the approved company profile and current contact flow. Careers/news content and structured data remain pending.
+The company domain, contact/location, service scope, company description, and legal pages are published from the approved company profile and current contact flow. Careers/news content and structured data remain pending. Google Search Console ownership and sitemap submission require domain-owner verification and are not configured in this repository.

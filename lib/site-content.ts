@@ -78,9 +78,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       about: {
         navLabel: "Tentang",
         eyebrow: "TENTANG PERUSAHAAN",
-        title: `Tentang ${siteConfig.companyName}`,
+        title: "Tentang PAP",
         description:
-          "Profil, visi, misi, dan nilai PT Pelita Anugrah Perkasa.",
+          "Profil, visi, misi, dan nilai PAP serta pengalaman perusahaan dalam desk collection dan labor supply.",
         statusTitle: "Tentang PT Pelita Anugrah Perkasa",
         statusBody:
           "Profil, visi, misi, dan nilai perusahaan tersedia berdasarkan Company Profile 2026.",
@@ -89,9 +89,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       services: {
         navLabel: "Layanan",
         eyebrow: "LAYANAN",
-        title: "Layanan operasional dan collection.",
+        title: "Desk Collection & Labor Supply",
         description:
-          "Desk collection, collection management, data management, reporting, dan labor supply.",
+          "Layanan desk collection, collection management, data management, reporting, dan labor supply untuk outsourcing operasional perusahaan.",
         statusTitle: "Empat layanan utama PAP",
         statusBody:
           "Desk collection, collection management, data management dan reporting system, serta labor supply.",
@@ -100,9 +100,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       industries: {
         navLabel: "Klien",
         eyebrow: "KLIEN KAMI",
-        title: "Mitra yang telah bekerja sama dengan PAP.",
+        title: "Klien PAP",
         description:
-          "Daftar klien PT Pelita Anugrah Perkasa berdasarkan Company Profile 2026.",
+          "Daftar klien PAP dalam profil perusahaan 2026, termasuk Traveloka, BAF, Akulaku, BCA, BFI Finance, dan mitra lainnya.",
         statusTitle: "Klien PAP",
         statusBody:
           "Daftar mitra bisnis dicantumkan pada halaman klien berdasarkan profil perusahaan yang disetujui.",
@@ -111,9 +111,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       operations: {
         navLabel: "Operasional",
         eyebrow: "OPERASIONAL",
-        title: "Proses desk collection dan sistem collection.",
+        title: "Proses Desk Collection",
         description:
-          "Alur kerja desk collection, kriteria account, metrik, dan sistem yang digunakan PAP.",
+          "Alur desk collection PAP: assignment, segmentasi account, negosiasi, skip tracing, field collection, monitoring, dan sistem collection.",
         statusTitle: "Alur desk collection",
         statusBody:
           "Halaman operasional menjelaskan proses, kriteria, indikator, dan sistem collection dari Company Profile 2026.",
@@ -122,9 +122,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       compliance: {
         navLabel: "Kepatuhan",
         eyebrow: "TATA KELOLA & TANGGUNG JAWAB",
-        title: "Sertifikasi ISO/IEC 27001:2022.",
+        title: "Sertifikasi ISO/IEC 27001:2022",
         description:
-          "Informasi sertifikasi sistem manajemen keamanan informasi, keamanan siber, dan perlindungan privasi PAP.",
+          "Sertifikasi ISO/IEC 27001:2022 PAP untuk keamanan informasi, keamanan siber, dan perlindungan privasi, berikut cakupan dan tanggal sertifikat.",
         statusTitle: "Sertifikasi ISO/IEC 27001:2022",
         statusBody:
           "Ruang lingkup dan tanggal sertifikasi ditampilkan mengikuti informasi dalam Company Profile 2026.",
@@ -155,9 +155,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       contact: {
         navLabel: "Kontak",
         eyebrow: "HUBUNGI KAMI",
-        title: "Mari mulai percakapan yang tepat.",
+        title: "Kontak PAP",
         description:
-          "Telepon Direktur atau isi formulir singkat untuk mengirim pertanyaan melalui WhatsApp.",
+          "Hubungi Direktur PT Pelita Anugrah Perkasa lewat telepon atau kirim pertanyaan layanan desk collection dan labor supply melalui WhatsApp.",
         statusTitle: "Hubungi PAP",
         statusBody:
           "Hubungi Direktur melalui panggilan telepon atau lanjutkan pertanyaan melalui WhatsApp.",
@@ -219,9 +219,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       about: {
         navLabel: "About",
         eyebrow: "ABOUT THE COMPANY",
-        title: `About ${siteConfig.companyName}`,
+        title: "About PAP",
         description:
-          "The profile, vision, mission and values of PT Pelita Anugrah Perkasa.",
+          "Learn about PAP’s profile, vision, mission, values, and experience in desk collection and labor supply.",
         statusTitle: "About PT Pelita Anugrah Perkasa",
         statusBody:
           "The company profile, vision, mission and values are based on the approved 2026 Company Profile.",
@@ -230,9 +230,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       services: {
         navLabel: "Services",
         eyebrow: "SERVICES",
-        title: "Operational and collection services.",
+        title: "Desk Collection & Labor Supply",
         description:
-          "Desk collection, collection management, data management, reporting and labor supply.",
+          "Desk collection, collection management, data management, reporting and labor supply for business process outsourcing in Indonesia.",
         statusTitle: "PAP’s four core services",
         statusBody:
           "Desk collection, collection management, data management and reporting systems, and labor supply.",
@@ -241,9 +241,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       industries: {
         navLabel: "Clients",
         eyebrow: "OUR CLIENTS",
-        title: "Partners who have worked with PAP.",
+        title: "PAP Clients",
         description:
-          "Clients of PT Pelita Anugrah Perkasa, as listed in the 2026 Company Profile.",
+          "PAP clients listed in the 2026 company profile, including Traveloka, BAF, Akulaku, BCA, BFI Finance and other partners.",
         statusTitle: "PAP clients",
         statusBody:
           "Business partners are listed on the clients page based on the approved company profile.",
@@ -252,9 +252,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       operations: {
         navLabel: "Operations",
         eyebrow: "OPERATIONS",
-        title: "Desk collection workflow and collection systems.",
+        title: "Desk Collection Process",
         description:
-          "Desk collection workflow, account criteria, metrics and systems used by PAP.",
+          "PAP’s desk collection workflow: assignment, account segmentation, negotiation, skip tracing, field collection, monitoring and collection systems.",
         statusTitle: "Desk collection workflow",
         statusBody:
           "The operations page explains the process, criteria, indicators and collection systems from the 2026 Company Profile.",
@@ -263,9 +263,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       compliance: {
         navLabel: "Compliance",
         eyebrow: "GOVERNANCE & RESPONSIBILITY",
-        title: "ISO/IEC 27001:2022 certification.",
+        title: "ISO/IEC 27001:2022 Certification",
         description:
-          "Information about PAP's information security management, cybersecurity and privacy protection certification.",
+          "PAP’s ISO/IEC 27001:2022 certification for information security, cybersecurity and privacy protection, including its scope and dates.",
         statusTitle: "ISO/IEC 27001:2022 certification",
         statusBody:
           "The certification scope and dates are presented as supplied in the approved 2026 Company Profile.",
@@ -296,9 +296,9 @@ export const copy: Record<Locale, LocaleCopy> = {
       contact: {
         navLabel: "Contact",
         eyebrow: "CONTACT",
-        title: "Let’s start the right conversation.",
+        title: "Contact PAP",
         description:
-          "Call the Director or fill out a short form to send an inquiry through WhatsApp.",
+          "Call the Director of PT Pelita Anugrah Perkasa or ask about desk collection and labor supply services through WhatsApp.",
         statusTitle: "Contact PAP",
         statusBody:
           "Call the Director or continue your inquiry through WhatsApp.",
@@ -364,6 +364,17 @@ export function pageMetadata(locale: Locale, slug: PageSlug) {
   return {
     title: page.title,
     description: page.description,
+    openGraph: {
+      type: "website" as const,
+      title: page.title,
+      description: page.description,
+      url: routeFor(locale, slug),
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: page.title,
+      description: page.description,
+    },
     ...((slug === "careers" || slug === "news")
       ? { robots: { index: false, follow: false } }
       : {}),
